@@ -124,7 +124,7 @@ const sendResubscriptionReminders = async () => {
  */
 const scheduleResubscriptionReminder = () => {
   cron.schedule(
-    "08 21 * * *",
+    "15 12 * * *",
     async () => {
       const istTime = DateTime.now().setZone("Asia/Kolkata");
       console.log(
