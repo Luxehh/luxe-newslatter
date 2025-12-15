@@ -62,7 +62,7 @@ const disableCompletedSubscriptions = async () => {
  */
 const scheduleAutoDisable = () => {
     // Run daily at 8:15 PM IST
-    cron.schedule("29 20 * * *", async () => {
+    cron.schedule("15 20 * * *", async () => {
         const istTime = DateTime.now().setZone("Asia/Kolkata");
         console.log(`⏰ Auto-disable cron triggered at ${istTime.toISO()}`);
         await disableCompletedSubscriptions();
