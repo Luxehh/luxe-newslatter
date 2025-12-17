@@ -27,6 +27,24 @@ router.post("/add", async (req, res) => {
 
         await newsletter.save();
 
+        // Send Twilio SMS after successful registration
+        try {
+            const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
+            
+            const message = `Congratulations, ${firstName}! You've successfully subscribed to the Luxe Hospice Care newsletter. 🎉`;
+
+            await client.messages.create({
+                body: message,
+                from: process.env.TWILIO_PHONE_NUMBER,
+                to: phoneNumber
+            });
+
+            console.log(`✅ Welcome SMS sent to ${phoneNumber}`);
+        } catch (smsError) {
+            // Log SMS error but don't fail the registration
+            console.error("❌ Failed to send welcome SMS:", smsError.message);
+        }
+
         res.status(201).json({
             message: "Newsletter subscription created successfully",
             subscriber: newsletter
