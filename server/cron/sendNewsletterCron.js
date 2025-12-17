@@ -109,7 +109,7 @@ const shouldSendToday = (createdAt) => {
  */
 const sendNewsletterMessage = async (subscriber, orderNumber, templateLink) => {
     try {
-        const messageBody = `Hello ${subscriber.firstName}! 📰\n\nHere's your Newsletter #${orderNumber} from Luxe Home Health.\n\n${templateLink}\n\nStay healthy and informed! 💙`;
+        const messageBody = `Hello ${subscriber.firstName}! \n\nHere's your Newsletter #${orderNumber} from Luxe Home Health.\n\n${templateLink}\n\nStay healthy and informed!`;
         
         const message = await client.messages.create({
             body: messageBody,
@@ -191,7 +191,7 @@ const sendMonthlyNewsletters = async () => {
             }
             
             // Add a small delay between messages to avoid rate limits
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 5000));
         }
         
         console.log(`✅ Newsletter job completed: ${sentCount} sent, ${skippedCount} skipped`);

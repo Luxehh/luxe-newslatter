@@ -48,19 +48,19 @@ const sendResubscriptionMessage = async (subscriber) => {
     const renewUrl = `${baseUrl}/api/newsletter/renew-subscription?phone=${encodedPhone}`;
     const cancelUrl = `${baseUrl}/api/newsletter/cancel-subscription?phone=${encodedPhone}`;
 
-    const messageBody = `Hello ${subscriber.firstName}! 👋
+    const messageBody = `Hello ${subscriber.firstName}!
 
 You've completed all 12 newsletters from Luxe Home Health. 
 
-📰 Would you like to continue receiving our monthly newsletters?
+Would you like to continue receiving our monthly newsletters?
 
 Reply to this message:
-✅ YES - To renew and receive 12 more newsletters.
-❌ NO - To cancel your subscription.
+YES - To renew and receive 12 more newsletters.
+NO - To cancel your subscription.
 
 Your subscription will be automatically cancelled if we don't hear from you.
 
-Thank you for being with us! 💙`;
+Thank you for being with us!`;
 
     const message = await client.messages.create({
       body: messageBody,
