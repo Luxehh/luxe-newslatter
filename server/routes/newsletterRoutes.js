@@ -423,7 +423,7 @@ router.post("/sms-webhook", async (req, res) => {
         }
 
         // Check for YES response - Renew subscription
-        if (incomingMsg === "YES" || incomingMsg === "Y") {
+        if (incomingMsg === "yes" || incomingMsg === "y") {
             // Update status to true and reset createdAt (restart 12-month cycle)
             subscriber.status = true;
             subscriber.createdAt = new Date();
@@ -433,7 +433,7 @@ router.post("/sms-webhook", async (req, res) => {
             console.log(`✅ Subscription renewed for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for NO response - Cancel subscription
-        else if (incomingMsg === "NO" || incomingMsg === "N") {
+        else if (incomingMsg === "no" || incomingMsg === "n") {
             // Update status to false
             subscriber.status = false;
             await subscriber.save();
@@ -442,14 +442,14 @@ router.post("/sms-webhook", async (req, res) => {
             console.log(`❌ Subscription cancelled for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for STOP - Unsubscribe
-        else if (incomingMsg === "STOP") {
+        else if (incomingMsg === "stop") {
             subscriber.status = false;
             await subscriber.save();
             twiml.message(`Your newsletter subscription has been stopped. You will not receive any more messages.`);
             console.log(`🛑 Subscription stopped for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for START - Resubscribe
-        else if (incomingMsg === "START") {
+        else if (incomingMsg === "start") {
             subscriber.status = true;
             subscriber.createdAt = new Date();
             await subscriber.save();
