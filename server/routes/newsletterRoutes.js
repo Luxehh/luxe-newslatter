@@ -31,7 +31,7 @@ router.post("/add", async (req, res) => {
         try {
             const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
             
-            const message = `Congratulations, ${firstName}! You've successfully subscribed to the Luxe Hospice Care newsletter. 🎉`;
+            const message = `Congratulations, ${firstName}! Welcome to Luxe Bereavement Newsletter Program for 13 months, Reply YES to Agree and start or NO to stop the program.`;
 
             await client.messages.create({
                 body: message,
@@ -254,8 +254,8 @@ const handleRenewSubscription = async (req, res) => {
                             <h1>Subscription Renewed!</h1>
                             <p>Hello <strong>${subscriber.firstName} ${subscriber.lastName}</strong>!</p>
                             <p>Your newsletter subscription has been successfully renewed.</p>
-                            <p>You will receive 12 monthly newsletters starting from your next anniversary date.</p>
-                            <p style="color: #666; margin-top: 30px;">Thank you for staying with Luxe Home Health! 💙</p>
+                            <p>You will receive 13 monthly newsletters starting from your next anniversary date.</p>
+                            <p style="color: #666; margin-top: 30px;">Thank you for staying with Luxe Hospice!</p>
                         </div>
                     </body>
                 </html>
@@ -367,7 +367,7 @@ const handleCancelSubscription = async (req, res) => {
                             <p>Your newsletter subscription has been cancelled as requested.</p>
                             <p>You will not receive any more newsletters from us.</p>
                             <p style="color: #666; margin-top: 30px;">We're sorry to see you go. You can re-subscribe anytime!</p>
-                            <p style="color: #666;">Thank you for being with Luxe Home Health! 💙</p>
+                            <p style="color: #666;">Thank you for being with Luxe Hospice!</p>
                         </div>
                     </body>
                 </html>
@@ -423,44 +423,43 @@ router.post("/sms-webhook", async (req, res) => {
         }
 
         // Check for YES response - Renew subscription
-        if (incomingMsg === "yes" || incomingMsg === "y") {
+        if (incomingMsg === "YES" || incomingMsg === "Y") {
             // Update status to true and reset createdAt (restart 12-month cycle)
             subscriber.status = true;
             subscriber.createdAt = new Date();
             await subscriber.save();
             
-            twiml.message(`Thank you, ${subscriber.firstName}! ✅\n\nYour newsletter subscription has been renewed successfully!\n\nYou will receive 12 monthly newsletters starting from next month.\n\nWelcome back to Luxe Home Health! 💙`);
+            twiml.message(`Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`);
             console.log(`✅ Subscription renewed for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for NO response - Cancel subscription
-        else if (incomingMsg === "no" || incomingMsg === "n") {
+        else if (incomingMsg === "NO" || incomingMsg === "N") {
             // Update status to false
             subscriber.status = false;
             await subscriber.save();
             
-            twiml.message(`We're sorry to see you go, ${subscriber.firstName}. ❌\n\nYour newsletter subscription has been cancelled.\n\nYou can re-subscribe anytime by contacting us.\n\nThank you for being with Luxe Home Health! 💙`);
+            twiml.message(`Your newsletter subscription has been stopped. You will not receive any more messages.`);
             console.log(`❌ Subscription cancelled for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for STOP - Unsubscribe
-        else if (incomingMsg === "stop") {
+        else if (incomingMsg === "STOP") {
             subscriber.status = false;
             await subscriber.save();
-            
             twiml.message(`Your newsletter subscription has been stopped. You will not receive any more messages.`);
             console.log(`🛑 Subscription stopped for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for START - Resubscribe
-        else if (incomingMsg === "start") {
+        else if (incomingMsg === "START") {
             subscriber.status = true;
             subscriber.createdAt = new Date();
             await subscriber.save();
             
-            twiml.message(`Welcome back, ${subscriber.firstName}! ✅\n\nYour newsletter subscription has been reactivated.\n\nYou will receive 12 monthly newsletters starting from next month.\n\nThank you for rejoining Luxe Home Health! 💙`);
+            twiml.message(`Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`);
             console.log(`🔄 Subscription restarted for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Unknown response
         else {
-            twiml.message(`Hi ${subscriber.firstName}! 👋\n\nTo manage your newsletter subscription, please reply with:\n\n✅ YES - To renew and receive 12 more newsletters\n❌ NO - To cancel your subscription\n\nThank you! 💙`);
+            twiml.message(`Hi ${subscriber.firstName}! \n\nTo manage your newsletter subscription, please reply with:\n\n YES - To renew and receive 12 more newsletters\n NO - To cancel your subscription\n\nThank you!`);
             console.log(`⚠️ Unknown response from ${from}: "${incomingMsg}"`);
         }
 
@@ -483,7 +482,7 @@ router.post("/test-twilio", async (req, res) => {
         
         // Test phone number
         const testPhoneNumber = "+919723393003";
-        const testMessage = "Hello! This is a test message from Luxe Home Health. Your Twilio integration is working successfully! 📰";
+        const testMessage = "Hello! This is a test message from Luxe Hospice. Your Twilio integration is working successfully! 📰";
 
         const message = await client.messages.create({
             body: testMessage,

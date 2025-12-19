@@ -50,12 +50,12 @@ const sendResubscriptionMessage = async (subscriber) => {
 
     const messageBody = `Hello ${subscriber.firstName}!
 
-You've completed all 12 newsletters from Luxe Home Health. 
+You've completed all 13 months Breavement newsletter from Luxe Hospice. 
 
-Would you like to continue receiving our monthly newsletters?
+Would you like to continue receiving our 13 months Breavement newsletter?
 
 Reply to this message:
-YES - To renew and receive 12 more newsletters.
+YES - To renew and receive 13 more months Breavement newsletter.
 NO - To cancel your subscription.
 
 Your subscription will be automatically cancelled if we don't hear from you.

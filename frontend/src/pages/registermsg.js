@@ -41,7 +41,7 @@ const RegisterMsg = () => {
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <img src={logo} alt="Logo" style={{ height: 50, width: 'auto', marginRight: 16 }} />
                         <Typography variant="h6" sx={{ color: '#7b6e4b', fontWeight: 600 }}>
-                            Welcome to Luxe Home Health
+                            Welcome to Luxe Hospice
                         </Typography>
                     </Box>
                 </Toolbar>
@@ -50,7 +50,7 @@ const RegisterMsg = () => {
             <Container maxWidth="md" sx={{ py: 5 }}>
                 <Paper elevation={3} sx={{ p: 4, borderRadius: 4, backgroundColor: '#ffffffdd' }}>
                     <Typography variant={isMobile ? 'h5' : 'h4'} gutterBottom fontWeight="bold" color="primary">
-                        Welcome to the Luxe Home Health
+                        Welcome to the Luxe Hospice
                     </Typography>
 
                     <Typography variant="body1" gutterBottom sx={{ mb: 3 }}>

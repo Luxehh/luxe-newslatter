@@ -61,7 +61,7 @@ Your newsletter subscription has been renewed successfully!
 
 You will receive 12 monthly newsletters starting from next month.
 
-Welcome back to Luxe Home Health! 💙
+Welcome back to Luxe Hospice!
 ```
 
 #### Reply: "NO" or "N"
@@ -75,7 +75,7 @@ Your newsletter subscription has been cancelled.
 
 You can re-subscribe anytime by contacting us.
 
-Thank you for being with Luxe Home Health! 💙
+Thank you for being with Luxe Hospice! 
 ```
 
 #### Reply: "STOP"
@@ -98,7 +98,7 @@ Your newsletter subscription has been reactivated.
 
 You will receive 12 monthly newsletters starting from next month.
 
-Thank you for rejoining Luxe Home Health! 💙
+Thank you for rejoining Luxe Hospice! 
 ```
 
 #### Reply: Anything else

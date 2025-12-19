@@ -4,7 +4,7 @@ import {
     Container, Paper, Typography, TextField, Button, Box, IconButton, InputAdornment
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import logo from '../assets/logo.png';
+import logo from '../assets/logoluxe.png';
 import { useAuth } from './AuthContext';
 import { apiUrl } from './constant';
 
@@ -83,7 +83,7 @@ const LoginPage = () => {
                     }}
                 >
                     <img src={logo} alt="Logo" style={{ width: 150, marginBottom: 16 }} />
-                    <Typography variant="h5" mb={2}>Welcome to Luxe Home Health</Typography>
+                    <Typography variant="h5" mb={2}>Welcome to Luxe Hospice</Typography>
 
                     <TextField
                         label="Email"

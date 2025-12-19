@@ -107,7 +107,7 @@ const Dashboard = () => {
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <img src={logo} alt="Logo" style={{ height: 50, width: 'auto', marginRight: 16 }} />
                         <Typography variant="h6" sx={{ color: '#7b6e4b', fontWeight: 600 }}>
-                            Welcome to Luxe Home Health
+                            Welcome to Luxe Hospice
                         </Typography>
                     </Box>
                     <Button variant="outlined" onClick={handleLogout} sx={{ borderColor: '#7b6e4b', color: '#7b6e4b' }}>
