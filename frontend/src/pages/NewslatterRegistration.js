@@ -8,7 +8,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import logo from "../assets/logo.png";
+import logo from "../assets/logoluxe.png";
 import { useAuth } from "./AuthContext";
 import { apiUrl } from "./constant";
 
@@ -104,7 +104,7 @@ function NewslatterRegistration() {
         >
           <img src={logo} alt="Logo" style={{ width: 150, marginBottom: 16 }} />
           <Typography variant="h5" mb={2}>
-            Subscribe to Our Newsletter
+            Subscribe to Our Luxe Bereavement Newsletter
           </Typography>
 
           <TextField
