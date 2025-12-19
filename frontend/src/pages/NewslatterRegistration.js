@@ -28,7 +28,7 @@ function NewslatterRegistration() {
     let valid = true;
     setFirstNameError("");
     setLastNameError("");
-    setPhoneNumberError(""); 
+    setPhoneNumberError("");
 
     if (!firstName) {
       setFirstNameError("Enter a valid first name");
@@ -49,39 +49,52 @@ function NewslatterRegistration() {
   };
 
   const handleRegistration = async () => {
-    if (!validate()) { return; }
+    if (!validate()) {
+      return;
+    }
 
     try {
       const res = await fetch(`${apiUrl}/api/newsletter/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName, phoneNumber }),
+        body: JSON.stringify({ firstName, lastName, phoneNumber : `+1${phoneNumber.replace(/\D/g, "")}` }),
       });
-        const data = await res.json();
-        if (data?.message) {
-            // Reset form fields
-            setFirstName("");
-            setLastName("");
-            setPhoneNumber("");
-            setError("");
-            setSuccess("");
-            setFirstNameError("");
-            setLastNameError("");
-            setPhoneNumberError("");
-            
-            // Check if it's a success or duplicate message
-            if (data.message.includes("already exists")) {
-                setError(data.message);
-            } else {
-                setSuccess(data.message);
-            }
-            //navigate("/registermsg");
+      const data = await res.json();
+      if (data?.message) {
+        // Reset form fields
+        setFirstName("");
+        setLastName("");
+        setPhoneNumber("");
+        setError("");
+        setSuccess("");
+        setFirstNameError("");
+        setLastNameError("");
+        setPhoneNumberError("");
+
+        // Check if it's a success or duplicate message
+        if (data.message.includes("already exists")) {
+          setError(data.message);
         } else {
-            setError(data.message || "Registration failed");
+          setSuccess(data.message);
         }
+        //navigate("/registermsg");
+      } else {
+        setError(data.message || "Registration failed");
+      }
     } catch (error) {
       setError("Registration failed. Please try again.");
     }
+  };
+
+  const formatPhone = (value) => {
+    const cleaned = value.replace(/\D/g, "").slice(0, 10); // Only numbers, max 10 digits
+    if (cleaned.length < 4) return cleaned;
+    if (cleaned.length < 7)
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
+      6,
+      10
+    )}`;
   };
 
   return (
@@ -157,12 +170,13 @@ function NewslatterRegistration() {
             fullWidth
             margin="normal"
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e) => setPhoneNumber(formatPhone(e.target.value))}
             error={!!phoneNumberError}
             helperText={phoneNumberError}
             InputProps={{
               sx: { borderRadius: "12px" },
             }}
+            placeholder="(123) 456-7890"
             sx={{
               "& label.Mui-focused": { color: "#7b6e4b" },
               "& .MuiOutlinedInput-root": {
@@ -174,7 +188,11 @@ function NewslatterRegistration() {
           />
 
           {success && (
-            <Typography color="success" mt={1} sx={{ color: '#4caf50', fontWeight: 'bold' }}>
+            <Typography
+              color="success"
+              mt={1}
+              sx={{ color: "#4caf50", fontWeight: "bold" }}
+            >
               {success}
             </Typography>
           )}
