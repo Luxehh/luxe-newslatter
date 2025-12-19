@@ -56,21 +56,23 @@ const disableCompletedSubscriptions = async () => {
     }
 };
 
+const TIMEZONE = "America/Chicago";
+
 /**
- * Schedule cron job to run daily at 8:15 PM IST (Asia/Kolkata timezone)
+ * Schedule cron job to run daily at 9:45 AM CST (America/Chicago timezone)
  * This runs 15 minutes before the newsletter sending cron
  */
 const scheduleAutoDisable = () => {
-    // Run daily at 8:15 PM IST
-    cron.schedule("15 20 * * *", async () => {
-        const istTime = DateTime.now().setZone("Asia/Kolkata");
-        console.log(`⏰ Auto-disable cron triggered at ${istTime.toISO()}`);
+    // Run daily at 9:45 AM CST
+    cron.schedule("45 9 * * *", async () => {
+        const cstTime = DateTime.now().setZone(TIMEZONE);
+        console.log(`⏰ Auto-disable cron triggered at ${cstTime.toISO()}`);
         await disableCompletedSubscriptions();
     }, {
-        timezone: "Asia/Kolkata"
+        timezone: TIMEZONE
     });
     
-    console.log("✅ Auto-disable completed subscriptions cron job scheduled (Daily at 8:15 PM IST)");
+    console.log("✅ Auto-disable completed subscriptions cron job scheduled (Daily at 9:45 AM CST)");
 };
 
 // Start the cron job

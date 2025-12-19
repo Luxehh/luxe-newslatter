@@ -118,27 +118,29 @@ const sendResubscriptionReminders = async () => {
   }
 };
 
+const TIMEZONE = "America/Chicago";
+
 /**
- * Schedule cron job to run daily at 8:45 PM IST (Asia/Kolkata timezone)
+ * Schedule cron job to run daily at 10:15 AM CST (America/Chicago timezone)
  * This runs 15 minutes after newsletter sending and 30 minutes after auto-disable
  */
 const scheduleResubscriptionReminder = () => {
   cron.schedule(
-    "45 20 * * *",
+    "15 10 * * *",
     async () => {
-      const istTime = DateTime.now().setZone("Asia/Kolkata");
+      const cstTime = DateTime.now().setZone(TIMEZONE);
       console.log(
-        `⏰ Re-subscription reminder cron triggered at ${istTime.toISO()}`
+        `⏰ Re-subscription reminder cron triggered at ${cstTime.toISO()}`
       );
       await sendResubscriptionReminders();
     },
     {
-      timezone: "Asia/Kolkata",
+      timezone: TIMEZONE,
     }
   );
 
   console.log(
-    "✅ Re-subscription reminder cron job scheduled (Daily at 8:45 PM IST)"
+    "✅ Re-subscription reminder cron job scheduled (Daily at 10:15 AM CST)"
   );
 };
 

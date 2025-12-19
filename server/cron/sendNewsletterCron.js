@@ -238,25 +238,27 @@ const sendMonthlyNewsletters = async () => {
   }
 };
 
+const TIMEZONE = "America/Chicago";
+
 /**
- * Schedule the newsletter job to run daily at 8:30 PM IST
+ * Schedule the newsletter job to run daily at 10:00 AM CST
  * It will check each subscriber and send if it's their monthly day
  */
 const startNewsletterCron = () => {
-  // Run daily at 8:30 PM India Standard Time
+  // Run daily at 10:00 AM Central Standard Time
   const rule = new schedule.RecurrenceRule();
-  rule.tz = "Asia/Kolkata";
-  rule.hour = 20;
-  rule.minute = 30;
+  rule.tz = TIMEZONE;
+  rule.hour = 10;
+  rule.minute = 0;
 
   schedule.scheduleJob(rule, sendMonthlyNewsletters);
   console.log(
-    "📰 Monthly newsletter cron job scheduled - Daily at 8:30 PM IST"
+    "📰 Monthly newsletter cron job scheduled - Daily at 10:00 AM CST"
   );
 
-  // Alternative: Use node-cron syntax (runs daily at 8:30 PM IST)
-  // cron.schedule('30 20 * * *', sendMonthlyNewsletters, {
-  //     timezone: "Asia/Kolkata"
+  // Alternative: Use node-cron syntax (runs daily at 10:00 AM CST)
+  // cron.schedule('0 10 * * *', sendMonthlyNewsletters, {
+  //     timezone: TIMEZONE
   // });
 };
 
