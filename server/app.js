@@ -35,7 +35,7 @@ app.use("/api/patients", patientRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/newsletter-templates", newsletterTemplateRoutes); 
 
-// Connect to MongoDB
+// Connect to MongoDB 
 connectDB();
 
 // Start Cron Jobs
