@@ -22,8 +22,8 @@ function App() {
         <Route path="/edit-patient/:id" element={authenticated ? <EditPatient /> : <Navigate to="/" />} /> */}
         <Route path="/newsletter-management" element={authenticated ? <NewsletterManagement /> : <Navigate to="/" />} />
         <Route path="/newsletter-templates" element={authenticated ? <NewsletterTemplates /> : <Navigate to="/" />} />
-        <Route path="/registermsg" element={<RegisterMsg />} />
-        <Route path="/terms" element={<TermsAndConditions />} />
+        {/* <Route path="/registermsg" element={<RegisterMsg />} /> */}
+        {/* <Route path="/terms" element={<TermsAndConditions />} /> */}
         <Route path="/newslatter-registration" element={<NewslatterRegistration />} />
       </Routes>
     </BrowserRouter>

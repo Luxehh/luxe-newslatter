@@ -14,7 +14,7 @@ import {
     useMediaQuery
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import logo from '../assets/logo.png';
+import logo from '../assets/logoluxe.png';
 
 const points = [
     "Our collective aim is to send you the right information at the right time to make preparing and recovering from surgery easier.",

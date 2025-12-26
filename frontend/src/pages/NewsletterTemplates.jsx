@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../assets/logoluxe.png';
 import TemplateTable from '../components/TemplateTable';
 import EditTemplateDialog from '../components/EditTemplateDialog';
 import axios from 'axios';
@@ -163,7 +163,7 @@ const NewsletterTemplates = () => {
             <Box maxWidth="xl" mx="auto" px={4}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                     <Typography variant="h5" sx={{ color: '#7b6e4b', fontWeight: 600 }}>
-                        Newsletter Templates ({templates.length}/12)
+                        Newsletter Templates ({templates.length}/13)
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 2 }}>
                         <Button
@@ -201,7 +201,7 @@ const NewsletterTemplates = () => {
                     mb: 3
                 }}>
                     <Typography variant="body2" sx={{ color: '#856404' }}>
-                        <strong>📌 Note:</strong> You need to add 12 templates (Order 1 to Order 12). 
+                        <strong>📌 Note:</strong> You need to add 13 templates (Order 1 to Order 13). 
                         Subscribers will receive newsletters sequentially based on their subscription date, 
                         starting with Order 1 in their first month, Order 2 in their second month, and so on.
                     </Typography>

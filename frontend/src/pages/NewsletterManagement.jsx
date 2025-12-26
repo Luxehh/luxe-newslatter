@@ -15,7 +15,7 @@ import {
     CircularProgress
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../assets/logoluxe.png';
 import NewsletterTable from '../components/NewsletterTable';
 import EditNewsletterDialog from '../components/EditNewsletterDialog';
 import axios from 'axios';
