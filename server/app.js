@@ -33,7 +33,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api/patients", patientRoutes);
 app.use("/api/newsletter", newsletterRoutes);
-app.use("/api/newsletter-templates", newsletterTemplateRoutes);
+app.use("/api/newsletter-templates", newsletterTemplateRoutes); 
 
 // Connect to MongoDB
 connectDB();
