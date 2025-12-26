@@ -6,7 +6,7 @@ const newsletterTemplateSchema = new mongoose.Schema({
         required: true,
         unique: true,
         min: 1,
-        max: 12
+        max: 13
     },
     templateLink: {
         type: String,

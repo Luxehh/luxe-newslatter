@@ -1,5 +1,6 @@
 const express = require("express");
 const Newsletter = require("../models/newsletter");
+const NewsletterTemplate = require("../models/newsletterTemplate");
 const router = express.Router();
 const twilio = require("twilio");
 require("dotenv").config();
@@ -429,7 +430,16 @@ router.post("/sms-webhook", async (req, res) => {
             subscriber.createdAt = new Date();
             await subscriber.save();
             
-            twiml.message(`Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`);
+            // Fetch Overview template (order number 13)
+            const overviewTemplate = await NewsletterTemplate.findOne({ orderNumber: 13, isActive: true });
+            
+            let message = `Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`;
+            
+            if (overviewTemplate && overviewTemplate.templateLink) {
+                message += `\n\nHere is your Overview newsletter: ${overviewTemplate.templateLink}`;
+            }
+            
+            twiml.message(message);
             console.log(`✅ Subscription renewed for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Check for NO response - Cancel subscription
@@ -454,7 +464,16 @@ router.post("/sms-webhook", async (req, res) => {
             subscriber.createdAt = new Date();
             await subscriber.save();
             
-            twiml.message(`Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`);
+            // Fetch Overview template (order number 13)
+            const overviewTemplate = await NewsletterTemplate.findOne({ orderNumber: 13, isActive: true });
+            
+            let message = `Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`;
+            
+            if (overviewTemplate && overviewTemplate.templateLink) {
+                message += `\n\nHere is your Overview newsletter: ${overviewTemplate.templateLink}`;
+            }
+            
+            twiml.message(message);
             console.log(`🔄 Subscription restarted for ${from} - ${subscriber.firstName} ${subscriber.lastName}`);
         }
         // Unknown response

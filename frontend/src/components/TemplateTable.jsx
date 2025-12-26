@@ -27,7 +27,7 @@ const TemplateTable = ({ templates, onEdit, onDelete }) => {
     };
 
     const getOrderLabel = (orderNumber) => {
-        return `Order ${orderNumber}`;
+        return orderNumber === 13 ? "Overview" : `Order ${orderNumber}`;
     };
 
     return (
