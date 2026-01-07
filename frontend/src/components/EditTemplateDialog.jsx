@@ -84,7 +84,7 @@ const EditTemplateDialog = ({
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
+    console.log("filename",file);
     // Validate file type
     const allowedTypes = [
       "application/pdf",
@@ -161,9 +161,9 @@ const EditTemplateDialog = ({
     if (
       !formData.orderNumber ||
       formData.orderNumber < 1 ||
-      formData.orderNumber > 13
+      formData.orderNumber > 14
     ) {
-      newErrors.orderNumber = "Order number must be between 1 and 13";
+      newErrors.orderNumber = "Order number must be between 1 and 14";
     }
 
     if (!formData.title.trim()) {
@@ -182,7 +182,7 @@ const EditTemplateDialog = ({
     if (validateForm()) {
       const submitData = {
         ...formData,
-        orderNumber: formData.title === "Overview" ? 13 : parseInt(formData.orderNumber),
+        orderNumber: formData.title === "Overview" ? 14 : parseInt(formData.orderNumber),
       };
 
       if (mode === "edit" && template) {
@@ -208,7 +208,7 @@ const EditTemplateDialog = ({
     onClose();
   };
 
-  const orderOptions = Array.from({ length: 13 }, (_, i) => i + 1);
+  const orderOptions = Array.from({ length: 14 }, (_, i) => i + 1);
 
   return (
     <Dialog
@@ -241,7 +241,7 @@ const EditTemplateDialog = ({
             error={!!errors.orderNumber}
             helperText={
               errors.orderNumber ||
-              "Select sequential order (1-13) for newsletter delivery"
+              "Select sequential order (1-14) for newsletter delivery"
             }
             fullWidth
             variant="outlined"
@@ -257,13 +257,15 @@ const EditTemplateDialog = ({
               },
             }}
           >
-            {orderOptions.map((order) => (
-              <MenuItem key={order} value={order}>
-                Order {order}
-              </MenuItem>
-            ))}
-            {orderOptions.length === 13 && (
-              <MenuItem key={13} value={13}>
+            {orderOptions.map((order) => 
+              order <= 13 && (
+                <MenuItem key={order} value={order}>
+                  Order {order}
+                </MenuItem>
+              )
+            )}
+            {orderOptions.length === 14 && (
+              <MenuItem key={14} value={14}>
                 Overview
               </MenuItem>
             )}

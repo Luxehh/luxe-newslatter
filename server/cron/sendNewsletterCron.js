@@ -27,7 +27,7 @@ const getTemplatesFromDatabase = async () => {
   }
 };
 
-// Fallback: 12 Monthly Newsletter PDF Template Links (used if database is empty)
+// Fallback: 13 Monthly Newsletter PDF Template Links (used if database is empty)
 const fallbackNewsletterTemplates = {
   1: "https://example.com/newsletter-month-1.pdf",
   2: "https://example.com/newsletter-month-2.pdf",
@@ -41,10 +41,11 @@ const fallbackNewsletterTemplates = {
   10: "https://example.com/newsletter-month-10.pdf",
   11: "https://example.com/newsletter-month-11.pdf",
   12: "https://example.com/newsletter-month-12.pdf",
+  13: "https://example.com/newsletter-month-13.pdf",
 };
 
 /**
- * Calculate which order number (1-12) the subscriber is currently on
+ * Calculate which order number (1-13) the subscriber is currently on
  * based on months since their creation date
  * Special handling: If user registered today, they get Order 1 tomorrow
  */
@@ -73,8 +74,8 @@ const getOrderNumber = (createdAt) => {
   const monthDiff = now.getMonth() - created.getMonth();
   const totalMonths = yearDiff * 12 + monthDiff + 1; // +1 because order 1 is the creation month
 
-  // Return between 1-12, or stop after 12 orders
-  return Math.min(totalMonths, 12);
+  // Return between 1-13, or stop after 13 orders
+  return Math.min(totalMonths, 13);
 };
 
 /**
@@ -190,10 +191,10 @@ const sendMonthlyNewsletters = async () => {
         continue;
       }
 
-      // Skip if they've completed all 12 orders
-      if (orderNumber > 12) {
+      // Skip if they've completed all 13 orders
+      if (orderNumber > 13) {
         console.log(
-          `⏭️ Subscriber ${subscriber.phoneNumber} has completed all 12 newsletters - skipping`
+          `⏭️ Subscriber ${subscriber.phoneNumber} has completed all 13 newsletters - skipping`
         );
         skippedCount++;
         continue;

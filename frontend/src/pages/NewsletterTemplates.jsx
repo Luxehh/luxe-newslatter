@@ -163,7 +163,7 @@ const NewsletterTemplates = () => {
             <Box maxWidth="xl" mx="auto" px={4}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                     <Typography variant="h5" sx={{ color: '#7b6e4b', fontWeight: 600 }}>
-                        Newsletter Templates ({templates.length}/13)
+                        Newsletter Templates ({templates.length}/14)
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 2 }}>
                         <Button

@@ -25,10 +25,10 @@ const getFilePathFromUrl = (url) => {
     if (!url) return null;
     try {
         // Extract filename from URL like: http://localhost:3000/uploads/newsletters/newsletter-123.pdf
-        const urlParts = url.split('/uploads/newsletters/');
+        const urlParts = url.split('/uploads/');
         if (urlParts.length > 1) {
             const filename = urlParts[1];
-            return path.join(__dirname, "../uploads/newsletters", filename);
+            return path.join(__dirname, "../uploads/", filename);
         }
         return null;
     } catch (error) {
@@ -40,7 +40,7 @@ const getFilePathFromUrl = (url) => {
 // Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, "../uploads/newsletters");
+        const uploadPath = path.join(__dirname, "../uploads");
         // Ensure directory exists
         if (!fs.existsSync(uploadPath)) {
             fs.mkdirSync(uploadPath, { recursive: true });
@@ -48,10 +48,22 @@ const storage = multer.diskStorage({
         cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
+        //const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1E9);
+        const uniqueSuffix = generateUniqueId();
         cb(null, "newsletter-" + uniqueSuffix + path.extname(file.originalname));
+        //cb(null, "newsletter-" + path.extname(file.originalname));
     }
 });
+
+function generateUniqueId() {
+  const chars = "abcdefghijklmnopqrstuvwxyz";
+  let id = "";
+  for (let i = 0; i < 3; i++) {
+    id += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return id;
+}
+
 
 const upload = multer({
     storage: storage,
@@ -77,7 +89,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
         }
 
         // Generate URL for the uploaded file
-        const fileUrl = `${req.protocol}://${req.get("host")}/uploads/newsletters/${req.file.filename}`;
+        const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
         res.status(200).json({
             message: "File uploaded successfully",

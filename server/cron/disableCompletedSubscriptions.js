@@ -4,7 +4,7 @@ const Newsletter = require("../models/newsletter");
 const { DateTime } = require("luxon");
 
 /**
- * Calculate if a subscriber has completed all 12 newsletters (reached 13th month)
+ * Calculate if a subscriber has completed all 13 newsletters (reached 14th month)
  */
 const hasCompleted12Newsletters = (createdAt) => {
     const created = new Date(createdAt);
@@ -21,8 +21,8 @@ const hasCompleted12Newsletters = (createdAt) => {
     const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
     const targetDay = Math.min(subscriptionDay, lastDayOfMonth);
     
-    // If it's the 13th month (12 months passed) and it's their subscription anniversary day
-    return totalMonths >= 12 && today === targetDay;
+    // If it's the 14th month (13 months passed) and it's their subscription anniversary day
+    return totalMonths >= 13 && today === targetDay;
 };
 
 /**
@@ -45,7 +45,7 @@ const disableCompletedSubscriptions = async () => {
                 subscriber.status = false;
                 await subscriber.save();
                 
-                console.log(`✅ Disabled subscription for ${subscriber.firstName} ${subscriber.lastName} (${subscriber.phoneNumber}) - completed 12 newsletters`);
+                console.log(`✅ Disabled subscription for ${subscriber.firstName} ${subscriber.lastName} (${subscriber.phoneNumber}) - completed 13 newsletters`);
                 disabledCount++;
             }
         }

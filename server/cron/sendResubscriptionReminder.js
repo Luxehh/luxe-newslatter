@@ -8,9 +8,9 @@ const { DateTime } = require("luxon");
 const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
 
 /**
- * Calculate if subscriber is in their 13th month (just completed 12 newsletters)
+ * Calculate if subscriber is in their 14th month (just completed 13 newsletters)
  */
-const isIn13thMonth = (createdAt) => {
+const isIn14thMonth = (createdAt) => {
   const created = new Date(createdAt);
   const now = new Date();
 
@@ -29,8 +29,8 @@ const isIn13thMonth = (createdAt) => {
   ).getDate();
   const targetDay = Math.min(subscriptionDay, lastDayOfMonth);
 
-  // If it's exactly the 13th month and it's their subscription anniversary day
-  return totalMonths === 12 && today === targetDay;
+  // If it's exactly the 14th month and it's their subscription anniversary day
+  return totalMonths === 13 && today === targetDay;
 };
 
 /**
@@ -97,8 +97,8 @@ const sendResubscriptionReminders = async () => {
     let sentCount = 0;
 
     for (const subscriber of allSubscribers) {
-      // Check if they're in their 13th month
-      if (isIn13thMonth(subscriber.createdAt)) {
+      // Check if they're in their 14th month (completed 13 months)
+      if (isIn14thMonth(subscriber.createdAt)) {
         // Send re-subscription reminder
         const sent = await sendResubscriptionMessage(subscriber);
         if (sent) {
@@ -147,4 +147,4 @@ const scheduleResubscriptionReminder = () => {
 // Start the cron job
 scheduleResubscriptionReminder();
 
-module.exports = { sendResubscriptionReminders, isIn13thMonth };
+module.exports = { sendResubscriptionReminders, isIn14thMonth };
