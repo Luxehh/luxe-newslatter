@@ -430,8 +430,8 @@ router.post("/sms-webhook", async (req, res) => {
             subscriber.createdAt = new Date();
             await subscriber.save();
             
-            // Fetch Overview template (order number 13)
-            const overviewTemplate = await NewsletterTemplate.findOne({ orderNumber: 13, isActive: true });
+            // Fetch Overview template (order number 14)
+            const overviewTemplate = await NewsletterTemplate.findOne({ orderNumber: 14, isActive: true });
             
             let message = `Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`;
             
@@ -464,8 +464,8 @@ router.post("/sms-webhook", async (req, res) => {
             subscriber.createdAt = new Date();
             await subscriber.save();
             
-            // Fetch Overview template (order number 13)
-            const overviewTemplate = await NewsletterTemplate.findOne({ orderNumber: 13, isActive: true });
+            // Fetch Overview template (order number 14)
+            const overviewTemplate = await NewsletterTemplate.findOne({ orderNumber: 14, isActive: true });
             
             let message = `Thank you, ${subscriber.firstName}! Great your 13-month Breavement Newsletter program has been started. You will receive one newsletter link every month.`;
             
