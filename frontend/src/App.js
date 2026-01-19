@@ -12,7 +12,7 @@ import NewsletterTemplates from './pages/NewsletterTemplates';
 
 function App() {
   const { authenticated } = useAuth();
-
+ 
   return (
     <BrowserRouter>
       <Routes>  

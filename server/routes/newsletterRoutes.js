@@ -421,7 +421,7 @@ router.post("/sms-webhook", async (req, res) => {
             console.log(`⚠️ No subscriber found for ${from}`);
             twiml.message("Sorry, you're not recognized in our newsletter system.");
             return res.type("text/xml").send(twiml.toString());
-        }
+        } 
 
         // Check for YES response - Renew subscription
         if (incomingMsg === "yes" || incomingMsg === "y") {
